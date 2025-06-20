@@ -37,7 +37,7 @@ Feature: kaesmera Gestión de personajes de Marvel (microservicio para CRUD de p
     When method POST
     Then status 201
     * def characterId = response.id
-
+    
     # Ahora obtenemos el personaje por su ID
     Given path basePath + '/' + characterId
     When method GET
@@ -60,7 +60,7 @@ Feature: kaesmera Gestión de personajes de Marvel (microservicio para CRUD de p
     * def uniqueName = 'Thor ' + timestamp
     * def jsonData = read('classpath:data/marvel_characters_api/request_create_character.json')
     * set jsonData.name = uniqueName
-
+    
     Given path basePath
     And request jsonData
     And header Content-Type = 'application/json'
@@ -75,13 +75,13 @@ Feature: kaesmera Gestión de personajes de Marvel (microservicio para CRUD de p
     * def uniqueName = 'Captain America ' + Date.now()
     * def jsonData = read('classpath:data/marvel_characters_api/request_create_character.json')
     * set jsonData.name = uniqueName
-
+    
     Given path basePath
     And request jsonData
     And header Content-Type = 'application/json'
     When method POST
     Then status 201
-
+    
     # Intentamos crear otro con el mismo nombre
     Given path basePath
     And request jsonData
@@ -107,19 +107,19 @@ Feature: kaesmera Gestión de personajes de Marvel (microservicio para CRUD de p
     * def uniqueName = 'Black Widow ' + Date.now()
     * def jsonData = read('classpath:data/marvel_characters_api/request_create_character.json')
     * set jsonData.name = uniqueName
-
+    
     Given path basePath
     And request jsonData
     And header Content-Type = 'application/json'
     When method POST
     Then status 201
     * def characterId = response.id
-
+    
     # Actualizamos el personaje
     * def updateData = read('classpath:data/marvel_characters_api/request_update_character.json')
     * set updateData.name = uniqueName
     * set updateData.description = "Master spy and assassin"
-
+    
     Given path basePath + '/' + characterId
     And request updateData
     And header Content-Type = 'application/json'
@@ -144,19 +144,19 @@ Feature: kaesmera Gestión de personajes de Marvel (microservicio para CRUD de p
     * def uniqueName = 'Hulk ' + Date.now()
     * def jsonData = read('classpath:data/marvel_characters_api/request_create_character.json')
     * set jsonData.name = uniqueName
-
+    
     Given path basePath
     And request jsonData
     And header Content-Type = 'application/json'
     When method POST
     Then status 201
     * def characterId = response.id
-
+    
     # Eliminamos el personaje
     Given path basePath + '/' + characterId
     When method DELETE
     Then status 204
-
+    
     # Verificamos que ya no existe
     Given path basePath + '/' + characterId
     When method GET
@@ -176,7 +176,7 @@ Feature: kaesmera Gestión de personajes de Marvel (microservicio para CRUD de p
   Scenario: T-API-kaesmera-CA11-Error interno del servidor 500 - karate
     # Este escenario simula un error del servidor enviando una petición malformada
     * def malformedJson = '{"name": "Malformed'
-
+    
     Given path basePath
     And request malformedJson
     And header Content-Type = 'application/json'

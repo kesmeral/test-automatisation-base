@@ -8,5 +8,10 @@ class KarateBasicTest {
     Karate testBasic() {
         return Karate.run("classpath:karate-test.feature");
     }
+    
+    @Karate.Test
+    Karate testMarvelCharacters() {
+        return Karate.run("classpath:com/pichincha/features/marvel_characters_api/gestionarPersonajesMarvel.feature");
+    }
 
 }
